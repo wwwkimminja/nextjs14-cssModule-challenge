@@ -39,12 +39,19 @@ async function getOneBillionaire(id: string) {
     console.error(e);
   }
 }
+export async function generateMetadata({ params: { id } }: { params: { id: string } }) {
+  const data: IPersonInfo = await getOneBillionaire(id);
+
+  return {
+    title: data.name,
+    description: `${data.name}'s details`,
+  };
+}
 
 async function Person({ params }) {
   const { id } = await params;
 
   const data: IPersonInfo = await getOneBillionaire(id);
-  console.log(data);
 
   return (
     <div className={styles.wrapper}>
