@@ -39,7 +39,8 @@ async function getOneBillionaire(id: string) {
     console.error(e);
   }
 }
-export async function generateMetadata({ params: { id } }: { params: { id: string } }) {
+export async function generateMetadata({ params }) {
+  const { id } = await params;
   const data: IPersonInfo = await getOneBillionaire(id);
 
   return {
